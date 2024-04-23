@@ -1,0 +1,90 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title #{pageTitle}
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .login-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        width: 350px;
+      }
+      h2 {
+        text-align: center;
+      }
+      input[type="text"],
+      input[type="password"],
+      a.button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        text-align: center;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        color: #333; /* Changed color to dark gray for better visibility */
+        cursor: text; /* Changed cursor to text for inputs */
+      }
+      a.login {
+        background-color: #4caf50; /* Green */
+        color: white;
+        cursor: pointer;
+      }
+      a.reset-password {
+        background-color: #f44336; /* Red */
+        color: white;
+      }
+      a.sign-up {
+        background-color: #007bff; /* Standard blue color */
+        color: white;
+        cursor: pointer;
+      }
+      a.button:hover {
+        opacity: 0.8;
+      }
+      button[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        text-align: center;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #4caf50; /* Green */ /* Changed color to dark gray for better visibility */
+        cursor: grab; /* Changed cursor to grab for buttons */
+      }
+      button.login {
+        background-color: #4caf50; /* Green */ 
+        color: white;
+      }
+      button.login:hover {
+        opacity: 0.8;
+      }
+  body
+    .login-container
+      h2 Login Form
+      form(action="/loginRequest" method="POST")
+        input(type="text", placeholder="Email", name="email", required)
+        input(type="password", placeholder="Password", name="password", required)
+        button.login(type="submit") Login
+        a.button.reset-password(href="/resetPassword") Reset Password
+        a.button.sign-up(href="/signupUser") Sign Up

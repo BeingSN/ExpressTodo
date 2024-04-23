@@ -1,0 +1,62 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title #{pageTitle}
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    style.
+      .navbar {
+        background-color: black;
+      }
+      .btn-add-todo {
+        background-color: #218838;;
+        border-color: #1e7e34;
+        color: #FFFFFF;
+      }
+      .btn-add-todo:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+        color: #FFFFFF;
+      }
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      a.navbar-brand(href="#") Todo App
+      button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse
+        ul.navbar-nav.ml-auto
+          li.nav-item
+            a.nav-link(href="/addTodosScreen", class="btn btn-add-todo") Add Todo
+          li.nav-item(style="margin-left: 10px;")
+            form(action="/logout", method="POST")
+              input(type="hidden", name="_csrf", value=csrfToken)
+              button.btn.btn-outline-danger(type="submit") Logout
+    .container
+      h1 My Todos
+      h4= `Hello ${email.split('@')[0]}`
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            th Todo
+            th Date
+            th Actions
+        tbody
+          each todo in userTodos
+            tr
+              td= todo.todo
+              td= new Date(todo.todoDate).toLocaleDateString()
+              td
+                a.btn.btn-primary(href=`/editTodo/${todo._id}`) Edit&nbsp; 
+                a.btn.btn-danger(href=`/deleteTodo/${todo._id}`) Delete
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+    style.
+      .navbar-nav {
+        margin-left: auto;
+      }
+      .nav-link.active {
+        font-weight: bold;
+      }

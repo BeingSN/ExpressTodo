@@ -1,0 +1,40 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title #{pageTitle}
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+    style.
+      .modal-content {
+        margin-top: 20%;
+      }
+      .modal-backdrop.show {
+        opacity: 0.5 !important;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+      }
+
+  body
+    .modal#exampleModal(tabindex='-1', role='dialog')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            h5.modal-title Delete Todo
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            p Are you sure you want to delete this todo?
+          .modal-footer
+            form(action=`/deleteTodoRequest/${document._id}`, method="POST")
+              input(type="hidden", name="_csrf", value=csrfToken)
+              button.btn.btn-danger(type='submit') Yes
+              a.btn.btn-secondary(href="/") No
+
+script.
+  $(document).ready(function(){
+    $('#exampleModal').modal('show');
+  });
