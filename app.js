@@ -11,7 +11,7 @@ const config = require("./config");
 const app = express();
 
 let store = new MongoDBStore({
-  uri: `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.zlveoht.mongodb.net/`,
+  uri: `${process.env.MONGO_DB_URI}`,
   collection: "mySessions",
 });
 
@@ -46,9 +46,7 @@ app.use(TodoRoute);
 // });
 
 mongoose
-  .connect(
-    "mongodb+srv://shahmirnazir:DFcnSVv1MI506e8C@cluster0.zlveoht.mongodb.net/"
-  )
+  .connect(`${process.env.MONGO_DB_URI}`)
   .then((response) => {
     if (response) {
       app.listen(5000, () => {
